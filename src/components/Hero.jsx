@@ -1,22 +1,48 @@
-import Spline from '@splinetool/react-spline'
 import { motion } from 'framer-motion'
 
 export default function Hero() {
+  const barHeights = [62, 120, 90, 150, 80, 130, 110, 170, 95, 140]
+
   return (
     <section className="relative min-h-[90vh] w-full overflow-hidden" aria-labelledby="hero-heading">
-      {/* 3D animation */}
+      {/* Data grid background */}
       <div className="absolute inset-0 z-0">
-        <Spline scene="https://prod.spline.design/EF7JOSsHLk16Tlw9/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-      </div>
-
-      {/* Ambient brand glows over 3D (don't block interaction) */}
-      <div className="pointer-events-none absolute inset-0 z-10">
-        <div className="absolute top-[-20%] left-[-10%] h-[55vh] w-[55vh] rounded-full bg-emerald-500/10 blur-3xl" />
-        <div className="absolute bottom-[-10%] right-[-10%] h-[60vh] w-[60vh] rounded-full bg-lime-400/10 blur-3xl" />
+        <svg className="h-full w-full" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#10b981" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.15" />
+            </linearGradient>
+            <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stopColor="#10b981" stopOpacity="0.25" />
+              <stop offset="60%" stopColor="#10b981" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="1200" height="800" fill="url(#glow)" />
+          {/* grid */}
+          {Array.from({ length: 24 }).map((_, i) => (
+            <line key={`v${i}`} x1={i * 50} y1={0} x2={i * 50} y2={800} stroke="url(#g1)" strokeWidth="1" />
+          ))}
+          {Array.from({ length: 16 }).map((_, i) => (
+            <line key={`h${i}`} x1={0} y1={i * 50} x2={1200} y2={i * 50} stroke="url(#g1)" strokeWidth="1" />
+          ))}
+          {/* shimmering sweep */}
+          <motion.rect
+            initial={{ x: -1200 }}
+            animate={{ x: 1200 }}
+            transition={{ repeat: Infinity, duration: 8, ease: 'linear' }}
+            y={0}
+            width={200}
+            height={800}
+            fill="#a3e635"
+            opacity={0.06}
+          />
+        </svg>
       </div>
 
       {/* Content */}
-      <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 pb-24">
+      <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-28 pb-20">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,45 +122,81 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Floating glass cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: 0.15, duration: 0.6 }}
-          className="mt-12 rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-4 sm:p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,.06)] max-w-5xl"
-        >
-          <div className="grid sm:grid-cols-4 gap-4 text-sm">
-            {[
-              { h: 'Ingest', p: 'CSV · Excel · Parquet · JSONL' },
-              { h: 'Explore', p: 'Descriptive stats & profiling' },
-              { h: 'Model', p: 'Forecasting & clustering' },
-              { h: 'Visualize', p: 'Auto charts & dashboards' },
-            ].map((card) => (
-              <motion.div
-                key={card.h}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.6 }}
-                transition={{ duration: 0.5 }}
-                className="rounded-xl border border-white/10 bg-[#0d1526]/60 p-4 hover:border-emerald-400/20 transition-colors"
-              >
-                <p className="text-white/60">{card.h}</p>
-                <p className="mt-1 text-white/90">{card.p}</p>
-              </motion.div>
-            ))}
-          </div>
+        {/* Data visuals: bar + line + scatter */}
+        <div className="mt-12 grid lg:grid-cols-2 gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,.06)]"
+          >
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-white/70">Revenue by segment</p>
+              <span className="text-xs text-emerald-300">auto‑generated chart</span>
+            </div>
+            <div className="mt-4 h-40 flex items-end gap-2">
+              {barHeights.map((h, i) => (
+                <motion.div
+                  key={i}
+                  className="w-6 rounded-t-lg bg-gradient-to-t from-emerald-500/70 to-lime-300/80"
+                  initial={{ height: h * 0.7 }}
+                  animate={{ height: [h * 0.7, h, h * 0.85, h] }}
+                  transition={{ duration: 4, repeat: Infinity, delay: i * 0.05 }}
+                />
+              ))}
+            </div>
+            <div className="mt-3 grid grid-cols-3 text-xs text-white/60">
+              <div>North</div><div>EMEA</div><div>APAC</div>
+            </div>
+          </motion.div>
 
-          {/* Mini metrics */}
-          <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-            {[{k:'Rows processed',v:'12.4M'}, {k:'Datasets',v:'3,129'}, {k:'Avg. latency',v:'1.3s'}, {k:'Models',v:'+25'}].map((m) => (
-              <div key={m.k} className="rounded-lg border border-white/10 bg-white/5 py-3">
-                <p className="text-xs text-white/50">{m.k}</p>
-                <p className="text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-lime-300">{m.v}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="rounded-2xl border border-white/10 bg-[#0d1526]/60 backdrop-blur p-5"
+          >
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-white/70">Query latency (p95)</p>
+              <span className="text-xs text-lime-300">Python + SQL</span>
+            </div>
+            <svg className="mt-4 h-40 w-full" viewBox="0 0 400 160">
+              <defs>
+                <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#10b981" />
+                  <stop offset="100%" stopColor="#a3e635" />
+                </linearGradient>
+              </defs>
+              <polyline
+                points="0,110 40,100 80,120 120,90 160,95 200,80 240,75 280,70 320,68 360,64 400,60"
+                fill="none"
+                stroke="url(#line)"
+                strokeWidth="3"
+                strokeLinecap="round"
+                opacity="0.9"
+              />
+              {Array.from({ length: 9 }).map((_, i) => (
+                <motion.circle
+                  key={i}
+                  cx={40 + i * 40}
+                  cy={[100, 120, 90, 95, 80, 75, 70, 68, 64][i]}
+                  r="4"
+                  fill="#a3e635"
+                  initial={{ opacity: 0.6, r: 3 }}
+                  animate={{ opacity: [0.6, 1, 0.6], r: [3, 5, 3] }}
+                  transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.12 }}
+                />
+              ))}
+            </svg>
+            <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
+              <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-white/70">SELECT p95_latency FROM logs</span>
+              <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-white/70">pandas.groupby()</span>
+              <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-white/70">seaborn.lineplot()</span>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )
