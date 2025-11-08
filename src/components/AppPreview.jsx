@@ -1,11 +1,12 @@
 import { Play, UploadCloud, MessageSquare, BarChart3, FileCode, Send } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 export default function AppPreview() {
   const [messages, setMessages] = useState([
     { role: 'user', content: 'Load sales.csv and summarize revenue by month.' },
     { role: 'assistant', content: 'Loaded 12,453 rows. Created a monthly revenue pivot and line chart.' },
   ])
+  const inputRef = useRef(null)
 
   return (
     <section id="app" className="relative py-20">
@@ -40,15 +41,18 @@ export default function AppPreview() {
             <form
               onSubmit={(e) => {
                 e.preventDefault()
-                const input = (e.currentTarget.elements.namedItem('prompt') as HTMLInputElement)
-                if (!input.value.trim()) return
-                setMessages((prev) => [...prev, { role: 'user', content: input.value }])
-                input.value = ''
+                const el = inputRef.current
+                if (!el) return
+                const value = el.value.trim()
+                if (!value) return
+                setMessages((prev) => [...prev, { role: 'user', content: value }])
+                el.value = ''
               }}
               className="p-4 border-t border-white/10"
             >
               <div className="flex items-center gap-2">
                 <input
+                  ref={inputRef}
                   name="prompt"
                   type="text"
                   placeholder="Ask a question about your data..."

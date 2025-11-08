@@ -3,55 +3,7 @@
 > vite
 
 
-  VITE v5.4.20  ready in 282 ms
+  VITE v5.4.20  ready in 271 ms
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://172.20.30.47:3000/
-5:26:52 AM [vite] Pre-transform error: Transform failed with 1 error:
-/home/workspace/src/components/AppPreview.jsx:43:76: ERROR: Expected ")" but found "as"
-5:26:53 AM [vite] Internal server error: Transform failed with 1 error:
-/home/workspace/src/components/AppPreview.jsx:43:76: ERROR: Expected ")" but found "as"
-  Plugin: vite:esbuild
-  File: /home/workspace/src/components/AppPreview.jsx:43:76
-  
-  Expected ")" but found "as"
-  41 |                onSubmit={(e) => {
-  42 |                  e.preventDefault()
-  43 |                  const input = (e.currentTarget.elements.namedItem('prompt') as HTMLInputElement)
-     |                                                                              ^
-  44 |                  if (!input.value.trim()) return
-  45 |                  setMessages((prev) => [...prev, { role: 'user', content: input.value }])
-  
-      at failureErrorWithLog (/home/workspace/node_modules/esbuild/lib/main.js:1472:15)
-      at /home/workspace/node_modules/esbuild/lib/main.js:755:50
-      at responseCallbacks.<computed> (/home/workspace/node_modules/esbuild/lib/main.js:622:9)
-      at handleIncomingPacket (/home/workspace/node_modules/esbuild/lib/main.js:677:12)
-      at Socket.readFromStdout (/home/workspace/node_modules/esbuild/lib/main.js:600:7)
-      at Socket.emit (node:events:508:28)
-      at addChunk (node:internal/streams/readable:559:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
-      at Readable.push (node:internal/streams/readable:390:5)
-      at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
-5:27:18 AM [vite] Internal server error: Transform failed with 1 error:
-/home/workspace/src/components/AppPreview.jsx:43:76: ERROR: Expected ")" but found "as"
-  Plugin: vite:esbuild
-  File: /home/workspace/src/components/AppPreview.jsx:43:76
-  
-  Expected ")" but found "as"
-  41 |                onSubmit={(e) => {
-  42 |                  e.preventDefault()
-  43 |                  const input = (e.currentTarget.elements.namedItem('prompt') as HTMLInputElement)
-     |                                                                              ^
-  44 |                  if (!input.value.trim()) return
-  45 |                  setMessages((prev) => [...prev, { role: 'user', content: input.value }])
-  
-      at failureErrorWithLog (/home/workspace/node_modules/esbuild/lib/main.js:1472:15)
-      at /home/workspace/node_modules/esbuild/lib/main.js:755:50
-      at responseCallbacks.<computed> (/home/workspace/node_modules/esbuild/lib/main.js:622:9)
-      at handleIncomingPacket (/home/workspace/node_modules/esbuild/lib/main.js:677:12)
-      at Socket.readFromStdout (/home/workspace/node_modules/esbuild/lib/main.js:600:7)
-      at Socket.emit (node:events:508:28)
-      at addChunk (node:internal/streams/readable:559:12)
-      at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
-      at Readable.push (node:internal/streams/readable:390:5)
-      at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
