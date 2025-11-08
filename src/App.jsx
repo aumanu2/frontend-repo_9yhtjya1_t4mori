@@ -5,11 +5,11 @@ import CTA from './components/CTA'
 
 function App() {
   return (
-    <div className="min-h-screen bg-[#0b1220] text-white selection:bg-indigo-400/30 selection:text-white">
-      {/* Ambient, minimal glows */}
+    <div className="min-h-screen bg-[#0b1220] text-white selection:bg-emerald-400/30 selection:text-white">
+      {/* Ambient, minimal glows aligned to green data theme */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[36rem] w-[36rem] rounded-full bg-indigo-500/10 blur-3xl" />
-        <div className="absolute top-1/3 -right-32 h-[26rem] w-[26rem] rounded-full bg-sky-400/10 blur-3xl" />
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[36rem] w-[36rem] rounded-full bg-emerald-500/10 blur-3xl" />
+        <div className="absolute top-1/3 -right-32 h-[26rem] w-[26rem] rounded-full bg-lime-400/10 blur-3xl" />
       </div>
 
       <Navbar />

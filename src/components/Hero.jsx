@@ -5,11 +5,10 @@ export default function Hero() {
     <section className="relative min-h-[80vh] w-full overflow-hidden" aria-labelledby="hero-heading">
       {/* Spline full-cover background (no negative z-index) */}
       <div className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/6tUXqVcUA0xgJugv/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-        {/* Darkening and brand tint overlays should not block interactions */}
+        <Spline scene="https://prod.spline.design/xm1zyUmdIZRP4-d1/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+        {/* Darkening and green brand tint overlays should not block interactions */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0b1220]/50 via-[#0b1220]/70 to-[#0b1220]" />
-        {/* Subtle neon data glow to complement the Spline topographic map */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_10%,rgba(16,185,129,0.18),rgba(11,18,32,0))]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_10%,rgba(16,185,129,0.20),rgba(11,18,32,0))]" />
       </div>
 
       {/* Content */}
@@ -22,15 +21,15 @@ export default function Hero() {
           <h1 id="hero-heading" className="mt-5 text-4xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-emerald-300">
             A modern Data Analysis AI Agent
           </h1>
-          <p className="mt-6 text-lg md:text-xl text-white/75 leading-relaxed">
+          <p className="mt-6 text-lg md:text-xl text-white/80 leading-relaxed">
             Upload a dataset, ask anything in plain language, and watch insights, charts, and production‑ready code unfold in seconds.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
-            <a href="#get-started" className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-sky-400 px-6 py-3 text-[#0b1220] font-semibold shadow-[0_20px_60px_-20px_rgba(99,102,241,.7)] hover:shadow-[0_24px_70px_-18px_rgba(56,189,248,.8)] transition-shadow">
+            <a href="#get-started" className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-400 to-lime-300 px-6 py-3 text-[#0b1220] font-semibold shadow-[0_20px_60px_-20px_rgba(52,211,153,.7)] hover:shadow-[0_24px_70px_-18px_rgba(163,230,53,.7)] transition-shadow">
               Get started
             </a>
-            <a href="#app" className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-white/80 hover:bg-white/10 transition-colors">
+            <a href="#app" className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-white/85 hover:bg-white/10 transition-colors">
               Explore the workspace
             </a>
           </div>
