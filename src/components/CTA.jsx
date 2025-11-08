@@ -2,10 +2,10 @@ export default function CTA() {
   return (
     <section id="get-started" className="relative py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#0f2438] to-[#0a1628] p-8 sm:p-12">
+        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#0e1627] to-[#0b1220] p-8 sm:p-12">
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
-            <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-teal-400/20 blur-3xl" />
+            <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-indigo-500/20 blur-3xl" />
+            <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-sky-400/20 blur-3xl" />
           </div>
 
           <div className="flex flex-col items-center text-center">
@@ -18,7 +18,7 @@ export default function CTA() {
                 <input type="file" className="hidden" accept=".csv,.xlsx,.xls" />
                 <span>Choose a file</span>
               </label>
-              <button className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-cyan-500 to-teal-400 px-6 py-3 text-[#0a1628] font-semibold shadow-[0_20px_60px_-20px_rgba(42,190,201,.8)] hover:shadow-[0_24px_70px_-18px_rgba(42,190,201,1)] transition-shadow">
+              <button className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-sky-400 px-6 py-3 text-[#0b1220] font-semibold shadow-[0_20px_60px_-20px_rgba(99,102,241,.7)] hover:shadow-[0_24px_70px_-18px_rgba(56,189,248,.8)] transition-shadow">
                 Start analyzing
               </button>
             </div>
