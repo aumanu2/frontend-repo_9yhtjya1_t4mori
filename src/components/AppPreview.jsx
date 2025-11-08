@@ -1,4 +1,4 @@
-import { Play, UploadCloud, MessageSquare, BarChart3, FileCode, Send } from 'lucide-react'
+import { Play, UploadCloud, MessageSquare, BarChart3, FileCode, Send, LineChart } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -109,16 +109,44 @@ export default function AppPreview() {
               <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4 }} className="rounded-xl border border-white/10 bg-[#0d1526]/70 p-4">
                 <p className="text-xs uppercase tracking-wide text-white/50">Visuals</p>
                 <div className="mt-3 grid grid-cols-2 gap-3">
-                  <motion.div whileHover={{ scale: 1.02 }} className="aspect-video rounded-lg bg-gradient-to-br from-emerald-500/20 to-lime-400/10 ring-1 ring-white/10" />
-                  <motion.div whileHover={{ scale: 1.02 }} className="aspect-video rounded-lg bg-gradient-to-br from-emerald-500/20 to-lime-400/10 ring-1 ring-white/10" />
-                  <motion.div whileHover={{ y: -2 }} className="col-span-2 h-24 rounded-lg bg-white/5 ring-1 ring-white/10" />
+                  {/* Trend card with data glyphs */}
+                  <motion.div whileHover={{ scale: 1.02 }} className="aspect-video rounded-lg ring-1 ring-white/10 p-3 bg-gradient-to-br from-emerald-500/10 to-lime-400/10">
+                    <div className="h-full w-full grid grid-cols-12 gap-1">
+                      {Array.from({ length: 24 }).map((_, i) => (
+                        <div key={i} className="col-span-1 flex flex-col justify-end">
+                          <div className="w-full rounded-sm bg-emerald-400/70" style={{ height: `${20 + Math.abs(Math.sin(i))*70}%` }} />
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.02 }} className="aspect-video rounded-lg ring-1 ring-white/10 p-3 bg-gradient-to-br from-emerald-500/10 to-lime-400/10">
+                    <div className="h-full w-full grid grid-cols-6 gap-2">
+                      {Array.from({ length: 6 }).map((_, i) => (
+                        <div key={i} className="h-full rounded-md bg-white/10 grid place-items-center">
+                          <span className="text-[10px] text-emerald-200">f{i+1}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                  <motion.div whileHover={{ y: -2 }} className="col-span-2 h-24 rounded-lg bg-white/5 ring-1 ring-white/10 flex items-center justify-between px-4">
+                    <div className="text-xs text-white/60">
+                      <p className="uppercase tracking-wide">Key metrics</p>
+                      <p className="text-white/80">ARPU +7.2% · Churn −1.1% · LTV +5.4%</p>
+                    </div>
+                    <LineChart className="h-6 w-6 text-emerald-300" />
+                  </motion.div>
                 </div>
               </motion.div>
 
               <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.05 }} className="rounded-xl border border-white/10 bg-[#0d1526]/70 p-4">
                 <p className="text-xs uppercase tracking-wide text-white/50">Generated Code</p>
                 <motion.div whileHover={{ y: -2 }} className="mt-3 text-[12px] leading-relaxed font-mono text-white/80 bg-black/30 rounded-lg p-3 ring-1 ring-white/10">
-                  <pre className="whitespace-pre-wrap">{`import pandas as pd\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('sales.csv')\ndf['month'] = pd.to_datetime(df['date']).dt.to_period('M')\npivot = df.groupby('month')['revenue'].sum()\npivot.plot(kind='line', color:'#22c55e')\nplt.title('Monthly Revenue')\nplt.show()`}</pre>
+                  <pre className="whitespace-pre-wrap">{`-- SQL generated from natural language\nWITH monthly AS (\n  SELECT DATE_TRUNC('month', date) AS month, SUM(revenue) AS revenue\n  FROM sales\n  GROUP BY 1\n)\nSELECT month, revenue,\n       revenue - LAG(revenue) OVER (ORDER BY month) AS delta\nFROM monthly\nORDER BY month;`}</pre>
+                </motion.div>
+
+                <p className="mt-4 text-xs uppercase tracking-wide text-white/50">Python</p>
+                <motion.div whileHover={{ y: -2 }} className="mt-2 text-[12px] leading-relaxed font-mono text-white/80 bg-black/30 rounded-lg p-3 ring-1 ring-white/10">
+                  <pre className="whitespace-pre-wrap">{`import pandas as pd\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n\ndf = pd.read_csv('sales.csv')\ndf['month'] = pd.to_datetime(df['date']).dt.to_period('M')\npivot = df.groupby('month')['revenue'].sum().reset_index()\nsns.lineplot(data=pivot, x='month', y='revenue', color="#22c55e")\nplt.title('Monthly Revenue')\nplt.tight_layout()\nplt.show()`}</pre>
                 </motion.div>
               </motion.div>
             </div>
@@ -127,21 +155,26 @@ export default function AppPreview() {
 
         {/* Highlights */}
         <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-          <MiniFeature icon={UploadCloud} title="Drag & drop" />
-          <MiniFeature icon={MessageSquare} title="Conversational" />
-          <MiniFeature icon={FileCode} title="Auto Python" />
-          <MiniFeature icon={BarChart3} title="Interactive charts" />
+          <MiniFeature icon={UploadCloud} title="Drag & drop" subtitle="CSV · Excel · Parquet" />
+          <MiniFeature icon={MessageSquare} title="Conversational" subtitle="English → SQL/Python" />
+          <MiniFeature icon={FileCode} title="Auto code" subtitle="Validated snippets" />
+          <MiniFeature icon={BarChart3} title="Charts" subtitle="Interactive visuals" />
         </motion.div>
       </div>
     </section>
   )
 }
 
-function MiniFeature({ icon: Icon, title }) {
+function MiniFeature({ icon: Icon, title, subtitle }) {
   return (
-    <motion.div whileHover={{ y: -2 }} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white/80">
-      <Icon className="h-4 w-4 text-emerald-300" />
-      <span className="text-sm">{title}</span>
+    <motion.div whileHover={{ y: -2 }} className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-white/80">
+      <div className="flex items-center gap-3">
+        <Icon className="h-4 w-4 text-emerald-300" />
+        <div>
+          <p className="text-sm">{title}</p>
+          {subtitle && <p className="text-[10px] text-white/50">{subtitle}</p>}
+        </div>
+      </div>
     </motion.div>
   )
 }

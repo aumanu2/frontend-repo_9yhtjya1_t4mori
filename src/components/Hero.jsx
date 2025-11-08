@@ -21,7 +21,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="max-w-3xl"
+          className="max-w-4xl"
         >
           <motion.span
             initial={{ opacity: 0, y: 8 }}
@@ -30,7 +30,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur px-3 py-1 text-xs text-white/80"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 shadow-[0_0_14px_rgba(52,211,153,.9)] animate-pulse" />
-            Live, animated data agent
+            Data‑native AI for analytics teams
           </motion.span>
 
           <motion.h1
@@ -40,7 +40,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 0.35, duration: 0.7 }}
           >
-            A modern Data Analysis AI Agent
+            Chat with your data. Generate insights, SQL, and notebooks.
           </motion.h1>
 
           <motion.p
@@ -49,7 +49,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            Upload a dataset, ask anything in plain language, and watch insights, charts, and production‑ready code unfold in seconds.
+            Connect CSV, Excel, Parquet, or a warehouse. Ask questions in plain English and instantly get validated queries, rich visualizations, and production‑ready Python.
           </motion.p>
 
           <motion.div
@@ -65,7 +65,7 @@ export default function Hero() {
               href="#get-started"
               className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-400 to-lime-300 px-6 py-3 text-[#0b1220] font-semibold shadow-[0_20px_60px_-20px_rgba(52,211,153,.7)] hover:shadow-[0_24px_70px_-18px_rgba(163,230,53,.7)] transition-shadow"
             >
-              Get started
+              Upload a dataset
             </motion.a>
             <motion.a
               variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
@@ -73,17 +73,18 @@ export default function Hero() {
               href="#app"
               className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-white/90 hover:bg-white/10 transition-colors"
             >
-              Explore the workspace
+              Try a sample analysis
             </motion.a>
           </motion.div>
 
+          {/* Data capability chips */}
           <motion.div
             className="mt-8 flex flex-wrap gap-3"
             initial="hidden"
             animate="show"
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
           >
-            {['Glass panels', 'Secure sandboxes', 'Auto Python', 'Interactive charts'].map((t) => (
+            {['SQL generation', 'Schema inference', 'Anomaly detection', 'Interactive dashboards'].map((t) => (
               <motion.span
                 key={t}
                 variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } }}
@@ -103,11 +104,12 @@ export default function Hero() {
           transition={{ delay: 0.15, duration: 0.6 }}
           className="mt-12 rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-4 sm:p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,.06)] max-w-5xl"
         >
-          <div className="grid sm:grid-cols-3 gap-4 text-sm">
+          <div className="grid sm:grid-cols-4 gap-4 text-sm">
             {[
-              { h: 'Upload', p: 'CSV, Excel, Parquet' },
-              { h: 'Chat', p: 'Ask anything about your data' },
-              { h: 'Generate', p: 'Insights, code, visuals' },
+              { h: 'Ingest', p: 'CSV · Excel · Parquet · JSONL' },
+              { h: 'Explore', p: 'Descriptive stats & profiling' },
+              { h: 'Model', p: 'Forecasting & clustering' },
+              { h: 'Visualize', p: 'Auto charts & dashboards' },
             ].map((card) => (
               <motion.div
                 key={card.h}
@@ -120,6 +122,16 @@ export default function Hero() {
                 <p className="text-white/60">{card.h}</p>
                 <p className="mt-1 text-white/90">{card.p}</p>
               </motion.div>
+            ))}
+          </div>
+
+          {/* Mini metrics */}
+          <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+            {[{k:'Rows processed',v:'12.4M'}, {k:'Datasets',v:'3,129'}, {k:'Avg. latency',v:'1.3s'}, {k:'Models',v:'+25'}].map((m) => (
+              <div key={m.k} className="rounded-lg border border-white/10 bg-white/5 py-3">
+                <p className="text-xs text-white/50">{m.k}</p>
+                <p className="text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-lime-300">{m.v}</p>
+              </div>
             ))}
           </div>
         </motion.div>
