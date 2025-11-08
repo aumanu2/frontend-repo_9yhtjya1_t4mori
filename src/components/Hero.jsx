@@ -1,14 +1,12 @@
-import Spline from '@splinetool/react-spline'
-
 export default function Hero() {
   return (
     <section className="relative min-h-[80vh] w-full overflow-hidden" aria-labelledby="hero-heading">
-      {/* Spline full-cover background (no negative z-index) */}
+      {/* Calmer brand background with emerald → lime energy */}
       <div className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/xm1zyUmdIZRP4-d1/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-        {/* Darkening and green brand tint overlays should not block interactions */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#0b1220]/50 via-[#0b1220]/70 to-[#0b1220]" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_10%,rgba(16,185,129,0.20),rgba(11,18,32,0))]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0b1220] via-[#0b1220] to-[#0b1220]" />
+        <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_20%_10%,rgba(52,211,153,0.18),rgba(11,18,32,0))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(50%_50%_at_80%_30%,rgba(163,230,53,0.18),rgba(11,18,32,0))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(70%_70%_at_50%_120%,rgba(34,197,94,0.12),rgba(11,18,32,0))]" />
       </div>
 
       {/* Content */}
@@ -18,7 +16,7 @@ export default function Hero() {
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 shadow-[0_0_14px_rgba(52,211,153,.9)]" />
             Live, interactive data agent
           </span>
-          <h1 id="hero-heading" className="mt-5 text-4xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-emerald-300">
+          <h1 id="hero-heading" className="mt-5 text-4xl md:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-lime-300">
             A modern Data Analysis AI Agent
           </h1>
           <p className="mt-6 text-lg md:text-xl text-white/80 leading-relaxed">
