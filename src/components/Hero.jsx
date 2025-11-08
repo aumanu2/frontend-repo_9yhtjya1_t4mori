@@ -1,3 +1,4 @@
+import Spline from '@splinetool/react-spline'
 import { motion } from 'framer-motion'
 
 export default function Hero() {
@@ -5,40 +6,15 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[90vh] w-full overflow-hidden" aria-labelledby="hero-heading">
-      {/* Data grid background */}
+      {/* 3D cover background (Spline) */}
       <div className="absolute inset-0 z-0">
-        <svg className="h-full w-full" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
-          <defs>
-            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#10b981" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.15" />
-            </linearGradient>
-            <radialGradient id="glow" cx="50%" cy="40%" r="60%">
-              <stop offset="0%" stopColor="#10b981" stopOpacity="0.25" />
-              <stop offset="60%" stopColor="#10b981" stopOpacity="0.08" />
-              <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          <rect width="1200" height="800" fill="url(#glow)" />
-          {/* grid */}
-          {Array.from({ length: 24 }).map((_, i) => (
-            <line key={`v${i}`} x1={i * 50} y1={0} x2={i * 50} y2={800} stroke="url(#g1)" strokeWidth="1" />
-          ))}
-          {Array.from({ length: 16 }).map((_, i) => (
-            <line key={`h${i}`} x1={0} y1={i * 50} x2={1200} y2={i * 50} stroke="url(#g1)" strokeWidth="1" />
-          ))}
-          {/* shimmering sweep */}
-          <motion.rect
-            initial={{ x: -1200 }}
-            animate={{ x: 1200 }}
-            transition={{ repeat: Infinity, duration: 8, ease: 'linear' }}
-            y={0}
-            width={200}
-            height={800}
-            fill="#a3e635"
-            opacity={0.06}
-          />
-        </svg>
+        <Spline scene="https://prod.spline.design/6tUXqVcUA0xgJugv/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+      </div>
+
+      {/* Ambient brand glows over 3D that do not block interaction */}
+      <div className="pointer-events-none absolute inset-0 z-10">
+        <div className="absolute top-[-10%] left-[-10%] h-[55vh] w-[55vh] rounded-full bg-emerald-500/10 blur-3xl" />
+        <div className="absolute bottom-[-10%] right-[-10%] h-[60vh] w-[60vh] rounded-full bg-lime-400/10 blur-3xl" />
       </div>
 
       {/* Content */}
@@ -53,7 +29,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 backdrop-blur px-3 py-1 text-xs text-white/80"
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 backdrop-blur px-3 py-1 text-xs text-white/80"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 shadow-[0_0_14px_rgba(52,211,153,.9)] animate-pulse" />
             Data‑native AI for analytics teams
@@ -70,7 +46,7 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
-            className="mt-6 text-lg md:text-xl text-white/85 leading-relaxed"
+            className="mt-6 text-lg md:text-xl text-white/85 leading-relaxed max-w-3xl"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
@@ -103,7 +79,7 @@ export default function Hero() {
             </motion.a>
           </motion.div>
 
-          {/* Data capability chips */}
+          {/* Capability chips */}
           <motion.div
             className="mt-8 flex flex-wrap gap-3"
             initial="hidden"
@@ -114,7 +90,7 @@ export default function Hero() {
               <motion.span
                 key={t}
                 variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } }}
-                className="rounded-full border border-white/15 bg-white/5 backdrop-blur px-3 py-1 text-xs text-white/75"
+                className="rounded-full border border-white/15 bg-black/30 backdrop-blur px-3 py-1 text-xs text-white/75"
               >
                 {t}
               </motion.span>
@@ -122,17 +98,17 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Data visuals: bar + line + scatter */}
+        {/* Data visuals overlay */}
         <div className="mt-12 grid lg:grid-cols-2 gap-6">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,.06)]"
+            className="rounded-2xl border border-white/10 bg-black/30 backdrop-blur p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,.06)]"
           >
             <div className="flex items-center justify-between">
-              <p className="text-sm text-white/70">Revenue by segment</p>
+              <p className="text-sm text-white/80">Revenue by segment</p>
               <span className="text-xs text-emerald-300">auto‑generated chart</span>
             </div>
             <div className="mt-4 h-40 flex items-end gap-2">
@@ -146,7 +122,7 @@ export default function Hero() {
                 />
               ))}
             </div>
-            <div className="mt-3 grid grid-cols-3 text-xs text-white/60">
+            <div className="mt-3 grid grid-cols-3 text-xs text-white/70">
               <div>North</div><div>EMEA</div><div>APAC</div>
             </div>
           </motion.div>
@@ -156,10 +132,10 @@ export default function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="rounded-2xl border border-white/10 bg-[#0d1526]/60 backdrop-blur p-5"
+            className="rounded-2xl border border-white/10 bg-black/30 backdrop-blur p-5"
           >
             <div className="flex items-center justify-between">
-              <p className="text-sm text-white/70">Query latency (p95)</p>
+              <p className="text-sm text-white/80">Query latency (p95)</p>
               <span className="text-xs text-lime-300">Python + SQL</span>
             </div>
             <svg className="mt-4 h-40 w-full" viewBox="0 0 400 160">
@@ -191,9 +167,9 @@ export default function Hero() {
               ))}
             </svg>
             <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
-              <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-white/70">SELECT p95_latency FROM logs</span>
-              <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-white/70">pandas.groupby()</span>
-              <span className="rounded-md border border-white/10 bg-white/5 px-2 py-1 text-white/70">seaborn.lineplot()</span>
+              <span className="rounded-md border border-white/10 bg-black/40 backdrop-blur px-2 py-1 text-white/70">SELECT p95_latency FROM logs</span>
+              <span className="rounded-md border border-white/10 bg-black/40 backdrop-blur px-2 py-1 text-white/70">pandas.groupby()</span>
+              <span className="rounded-md border border-white/10 bg-black/40 backdrop-blur px-2 py-1 text-white/70">seaborn.lineplot()</span>
             </div>
           </motion.div>
         </div>
